@@ -24,9 +24,44 @@ function MessageListScreen({route,navigation}) {
     return(
         <View style={StyleSheet.container}>
             <FlatList
-                
+                data={MessageListData}
+                renderItem={({item}) => (
+                    <RenderItem name={item.name} activeMessage={item.activeMessage} id={item.id}
+                                avatarUrl={item,avatarUrl}/>)}
+                keyExtractor={({id}) => id}
             />
-        
         </View>
-    )
+    );
 }
+
+const styles = StyleSheet.create({
+    conatiner:{
+        flex:1,
+        backgroundColor:'#fff',
+        alignItems: 'center',
+        justifyContent:'flex-start',
+        paddingTop: 15
+    },
+    singleChatContainer:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        width: screenWidth,
+        paddingHorizontal: 15,
+        marginBottom:20
+    },
+    leftElementContainer:{
+        flexDirection:'row',
+    },
+    nameContainer:{
+        flexDirection:'column',
+        justifyContent:'center',
+        marginLeft:10
+    },
+    activity:{
+        color:'grey',
+        marginTop:5
+    }
+});
+
+export default MessageListScreen;
