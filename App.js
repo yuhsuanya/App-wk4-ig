@@ -35,13 +35,14 @@ export default function App() {
                     )
                 }
             }}/>
-            <RootStack.Screen
-                name="MessageListScreen"
-                component={MessageListScreen}
-                options={{
+            <RootStack.Screen name="MessageListScreen" component={MessageListScreen} options={{
                   title: 'yuhsuanya',
                   headerLeft: () =>{
-
+                      return(
+                          <TouchableOpacity style={{marginLeft: 15}} onPress={() => rootNavigationRef.current?.navigate('PostListScreen')}>
+                              <Ionicons name="ios-arrow-back" size={24}/>
+                          </TouchableOpacity>
+                      )
                   },
                   headerRight: () => {
                       return (
