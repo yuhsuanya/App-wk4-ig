@@ -1,20 +1,64 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Image, StyleSheet,TouchableOpacity,View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler';
+import { createStackNavigator } from '@react-navigation/stack';
+import PostListScreen from './src/components/PostListScreen';
+import MessageListScreen from './src/components/MessageListScreen';
+
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+const RootStack = createStackNavigator();
+const rootNavigationRef = React.createRef();
+
+const InstagramImageUrl = 'https://github.com/yuhsuanya/App-wk4-ig/blob/master/assets/Instagram.png?raw=true';
+const CameraIconUrl = 'https://github.com/yuhsuanya/App-wk4-ig/blob/master/assets/Icons/Camera.png?raw=true';
+const MessageIconUrl = 'https://github.com/yuhsuanya/App-wk4-ig/blob/master/assets/Icons/Message.png?raw=true';
+
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.p1}>110619044</Text>
-      <Text style={styles.p2}>楊育瑄</Text>
+      <NavigationContainer ref={rootNavigationRef}>
+          <RootStack.Navigator>
+            <RootStack.Screen name="PostListScreen" component={PostListScreen} options={{
+                headerLeft: () => <Image source={{uri: CameraIconUrl}} style={styles.cameraIcon}/>,
+                headerTitle: () =><Image source={{uri: InstagramImageUrl}} style={styles.InstagramImage}/>,
+                headerRight:() => {
+                    return(
+                      <TouchableOpacity
+                      onPress={() => rootNavigationRef.current?.navigate('MessageListScreen')}>
+                        <Image source={{uri: MessageIconUrl}}
+                               style={styles.messageIcon}/>
+                      </TouchableOpacity>
+                    )
+                }
+            }}/>
+            <RootStack.Screen
+                name="MessageListScreen"
+                component={MessageListScreen}
+                options={{
+                  title: 'yuhsuanya',
+                  headerLeft: () =>{
 
-   
-      <View style={styles.square}></View>
-      <View style={styles.square1}></View>
-      <View style={styles.square2}></View>
-      <View style={styles.square3}></View>
-      <View style={styles.square4}></View>
-      <View style={styles.square5}></View>
-   </View>
+                  },
+                  headerRight: () => {
+                      return (
+                        <view style={styles.row}>
+                            <TouchableOpacity style={{marginRight: 15}}>
+                              <FontAwesome name="video-camera" size={22}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                              <FontAwesome name="pencil-square-o" size={22}/>
+                            </TouchableOpacity>
+                        </view>
+                      )
+                  }
+                }}
+            />
+          </RootStack.Navigator>
+      </NavigationContainer>    
     
   );
 }
@@ -22,60 +66,28 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFB5B5',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    fontFamily:'微軟正黑體',
-    
   },
-  p1:{
-    fontSize:18,
-    color:'#666666',
+  row: {
+      flexDirection:'row',
+      paddingRight: 15,
   },
-  p2:{
-  fontSize:20,
-  top:10,
-  color:'#666666',
+  messageIcon:{
+    marginRight: 15,
+    marginBottom: 5,
+    width: 24,
+    height: 24,
   },
-  square:{
-   width: 30,
-   height: 30,
-   bottom:-80,
-   backgroundColor:'#FF8888',
+  cameraIcon:{
+    marginLeft: 15,
+    marginBottom: 5,
+    width: 24,
+    height: 24,
   },
-  square1:{
-  width: 30,
-  height: 30,
-  bottom:-40,
-  right:20,
-  backgroundColor:'#FF8888',
-  },
-  square2:{
-  width: 30,
-  height: 30,
-  bottom:-0,
-  right:40,
-  backgroundColor:'#FF8888',
-  },
-  square3:{
-  width: 30,
-  height: 30,
-  bottom:20,
-  right:-20,
-  backgroundColor:'#FF8888',
-  },
-  square4:{
-  width: 30,
-  height: 30,
-  bottom:60,
-  right:-40,
-  backgroundColor:'#FF8888',
-  },
-  square5:{
-    width: 30,
-    height: 30,
-    bottom:40,
-    
-    backgroundColor:'#FF8888',
-    },
+  InstagramImage:{
+    width: 110,
+    height: 40,
+  }
 });
