@@ -3,8 +3,9 @@ import {Image, StyleSheet,TouchableOpacity,View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
-import PostListScreen from './src/components/PostListScreen';
 import MessageListScreen from './src/components/MessageListScreen';
+import PostListScreen from './src/components/PostListScreen';
+
 
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -46,18 +47,17 @@ export default function App() {
                   },
                   headerRight: () => {
                       return (
-                        <view style={styles.row}>
+                        <View style={styles.row}>
                             <TouchableOpacity style={{marginRight: 15}}>
                               <FontAwesome name="video-camera" size={22}/>
                             </TouchableOpacity>
                             <TouchableOpacity>
                               <FontAwesome name="pencil-square-o" size={22}/>
                             </TouchableOpacity>
-                        </view>
+                        </View>
                       )
                   }
-                }}
-            />
+                }}/>
           </RootStack.Navigator>
       </NavigationContainer>    
     
